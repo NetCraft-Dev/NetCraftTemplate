@@ -35,12 +35,18 @@ apis:
   - id: NetCraft.ModApi.Wrapper.NcPlayers
     title: Player actions
     summary: Look up online players and act on them.
+    template: examples/NcPlayers.cs
     members: [All, Count, Max, Find, Send, SendOverlay, Kick, SetGameMode, SetPermissionLevel, Teleport, TeleportTo, SetHealth, Heal, Hurt]
   - id: NetCraft.ModApi.Wrapper.NcWorld
     title: World access
-    summary: Block read and write, time, weather level and world border.
+    summary: Block read and write on any dimension, plus the level handles for time, weather and border.
     template: examples/NcWorld.cs
     members: [Overworld, Nether, End, Get, DayTime, GameTime, Clock, RainLevel, ThunderLevel, IsRaining, IsThundering, Border, Entities, GetBlock, SetBlock, BreakBlock, GetBlockEntity, PlaySound, LevelEvent, FindBlock, FindState]
+  - id: NetCraft.ModApi.Wrapper.NcLevel
+    title: Level handle
+    summary: Read only view over one dimension, holding its time, weather and height range.
+    template: examples/NcLevel.cs
+    members: [Dimension, DayTime, GameTime, RainLevel, ThunderLevel, IsRaining, IsThundering, MinBuildHeight, MaxBuildHeight, Ticks, ForceLoadChunk, UnloadForceLoadedChunk]
   - id: NetCraft.ModApi.Wrapper.NcRegistries
     title: Registry lookup
     summary: Find blocks, items, biomes, particles and entity types by id.
@@ -49,14 +55,17 @@ apis:
   - id: NetCraft.ModApi.Wrapper.NcRecipes
     title: Recipe lookup
     summary: Crafting, stonecutting and cooking recipes.
+    template: examples/NcRecipes.cs
     members: [Manager, IsAvailable, Require, Count, StonecutterCount, CookingCount, Craft, Find, StonecuttingFor, CookingFor]
   - id: NetCraft.ModApi.Wrapper.NcLists
     title: Lists and settings
     summary: Whitelist, operators, bans and server.properties.
+    template: examples/NcLists.cs
     members: [WhiteList, Ops, Bans, IpBans, Settings, IsOp, IsBanned, IsWhitelisted, SetGameMode, SetDifficulty, SetPlayerIdleTimeout, SetWhiteList, SaveSettings]
   - id: NetCraft.ModApi.Wrapper.NcStartup
     title: Startup arguments
     summary: Tokens the kernel did not recognize, plus per name subscriptions.
+    template: examples/NcStartup.cs
     members: [Ready, Arguments, IsReady, Has, Value, Values, Subscribe]
   - id: NetCraft.ModApi.Wrapper.ServerEvents
     title: Server events
@@ -66,10 +75,12 @@ apis:
   - id: NetCraft.ModApi.Wrapper.ClientEvents
     title: Client events
     summary: Client side tick.
+    template: examples/ClientEvents.cs
     members: [Tick]
   - id: NetCraft.ModApi.Wrapper.NetworkEvents
     title: Network events
     summary: Inbound packets on both sides.
+    template: examples/NetworkEvents.cs
     members: [PacketReceived]
   - id: NetCraft.ModApi.Extension.InjectAttribute
     title: Injection attribute
@@ -78,3 +89,4 @@ apis:
   - id: NetCraft.ModApi.Extension.MixinAttribute
     title: Mixin attribute
     summary: Move members of your class into a kernel type.
+    template: examples/MixinAttribute.cs
