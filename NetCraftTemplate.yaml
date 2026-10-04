@@ -26,7 +26,7 @@ apis:
     title: Server facade
     summary: Online list, broadcast, command execution and save.
     template: examples/NcServer.cs
-    members: [Current, IsAvailable, Require, Settings, Commands, TickRate, EntityTracker, CommandStorage, GameRules, PlayerData, Stopwatches, DebugPlayers, Connections, BlockEntities, Overworld, Nether, End, GetLevel, Running, TickCount, AverageTickTimeNanos, Tps, WorldSeed, SpawnPos, SetSpawnPos, DefaultGameType, SetDefaultGameType, WhiteListEnabled, SavingEnabled, SetWeather, SaveAll, Broadcast, Execute]
+    members: [Current, IsAvailable, Require, Settings, Commands, TickRate, EntityTracker, CommandStorage, GameRules, PlayerData, Stopwatches, DebugPlayers, Connections, BlockEntities, Overworld, Nether, End, Running, TickCount, AverageTickTimeNanos, Tps, WorldSeed, SpawnPos, SetSpawnPos, DefaultGameType, SetDefaultGameType, WhiteListEnabled, SavingEnabled, SetWeather, SaveAll, Broadcast, Execute]
   - id: NetCraft.ModApi.Wrapper.NcPlayer
     title: Player handle
     summary: Read only view over a kernel ServerPlayer.

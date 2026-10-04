@@ -1,13 +1,14 @@
 // NcWorld: block and world state.
 //
 // Members without a level argument act on the overworld. Overloads that take
-// a level work for the nether and the end as well, see NcServer.GetLevel.
+// an NcLevel work for the nether and the end as well, see NcWorld.Get.
+//
+// Coordinates are always plain x y z ints, no BlockPos on the public surface.
 //
 // The namespace and class below are filled in by `ncm template example`,
 // using the project you run it in.
 using NetCraft.Logging;
 using NetCraft.ModApi.Wrapper;
-using NetCraft.Primitives;
 using NetCraft.Registry.State;
 
 namespace __MOD_NAMESPACE__;
@@ -35,7 +36,7 @@ public static class __MOD_CLASS__
         if (state is null)
             return;
 
-        var changed = NcWorld.SetBlock(new BlockPos(x, y, z), state);
+        var changed = NcWorld.SetBlock(x, y, z, state);
         Log.Info($"set {blockId}: {changed}");
     }
 
@@ -43,7 +44,7 @@ public static class __MOD_CLASS__
     // Pass a player to get the player specific callbacks, null for environment.
     public static void Break(int x, int y, int z, NcPlayer? player = null)
     {
-        NcWorld.BreakBlock(new BlockPos(x, y, z), player);
+        NcWorld.BreakBlock(x, y, z, player);
     }
 
     // Time and weather are read and written through the world.
@@ -56,5 +57,17 @@ public static class __MOD_CLASS__
     {
         NcWorld.RainLevel = 0f;
         NcWorld.ThunderLevel = 0f;
+    }
+
+    // A handle is also how you reach another dimension, it carries the same
+    // time and weather members as the overworld.
+    public static void EmptyTheNether()
+    {
+        var nether = NcWorld.Get("minecraft:the_nether");
+        if (nether is null)
+            return;
+
+        nether.RainLevel = 0f;
+        Log.Info($"dimension {nether.Dimension} at tick {nether.Ticks}");
     }
 }
