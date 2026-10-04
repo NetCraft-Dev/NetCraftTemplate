@@ -1,0 +1,34 @@
+# NetCraft mod template catalog.
+# Read by `ncm template`. Field names stay in sync with TemplateCatalog.cs.
+
+# Fetch base for every template path below.
+base: https://raw.githubusercontent.com/XSY-HYH/NetCraftTemplate/refs/heads/main
+
+# Document rendered by `ncm template ui`.
+document: NetCraftTemplate.md
+
+apis:
+  - id: NetCraft.ModApi.Wrapper.NcServer
+    title: Server facade
+    summary: Online list, broadcast, command execution and save.
+    template: examples/NcServer.cs
+  - id: NetCraft.ModApi.Wrapper.NcPlayer
+    title: Player handle
+    summary: Read only view over a kernel ServerPlayer.
+    template: examples/NcPlayer.cs
+  - id: NetCraft.ModApi.Wrapper.NcWorld
+    title: World access
+    summary: Block read and write, time, weather level and world border.
+    template: examples/NcWorld.cs
+  - id: NetCraft.ModApi.Wrapper.ServerEvents
+    title: Server events
+    summary: Subscribe to lifecycle, player, chunk and block events.
+    template: examples/ServerEvents.cs
+  - id: NetCraft.ModApi.Extension.InjectAttribute
+    title: Injection attribute
+    summary: Hook your own method onto a kernel call site.
+    template: examples/InjectAttribute.cs
+  - id: NetCraft.ModApi.Wrapper.NcRegistries
+    title: Registry lookup
+    summary: Find blocks, items, biomes, particles and entity types by id.
+    template: examples/NcRegistries.cs
