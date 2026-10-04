@@ -3,15 +3,16 @@
 // Members without a level argument act on the overworld. Overloads that take
 // a level work for the nether and the end as well, see NcServer.GetLevel.
 //
-// Replace the MyMod namespace with the one your mod uses.
+// The namespace and class below are filled in by `ncm template example`,
+// using the project you run it in.
 using NetCraft.Logging;
 using NetCraft.ModApi.Wrapper;
 using NetCraft.Primitives;
 using NetCraft.Registry.State;
 
-namespace MyMod;
+namespace __MOD_NAMESPACE__;
 
-public static class NcWorldExample
+public static class __MOD_CLASS__
 {
     // Read one block. A null result means the chunk is not loaded right now.
     public static void Inspect(int x, int y, int z)

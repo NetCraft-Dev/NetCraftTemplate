@@ -4,13 +4,14 @@
 // throws until the main loop is up. Only call it from an event callback,
 // and guard with IsAvailable when the call site is somewhere else.
 //
-// Replace the MyMod namespace with the one your mod uses.
+// The namespace and class below are filled in by `ncm template example`,
+// using the project you run it in.
 using NetCraft.Logging;
 using NetCraft.ModApi.Wrapper;
 
-namespace MyMod;
+namespace __MOD_NAMESPACE__;
 
-public static class NcServerExample
+public static class __MOD_CLASS__
 {
     // Send a system message to everyone online.
     public static void BroadcastOnlineCount()

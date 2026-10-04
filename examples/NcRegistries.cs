@@ -4,13 +4,14 @@
 // before that finishes. Do not cache what you read during Init, read it again
 // from a server event once the world is up.
 //
-// Replace the MyMod namespace with the one your mod uses.
+// The namespace and class below are filled in by `ncm template example`,
+// using the project you run it in.
 using NetCraft.Logging;
 using NetCraft.ModApi.Wrapper;
 
-namespace MyMod;
+namespace __MOD_NAMESPACE__;
 
-public static class NcRegistriesExample
+public static class __MOD_CLASS__
 {
     // The Find helpers take a namespaced id and return null when nothing matches.
     public static void Lookup()

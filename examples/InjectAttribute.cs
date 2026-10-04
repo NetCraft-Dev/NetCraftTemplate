@@ -12,15 +12,16 @@
 //   2. The kernel no longer runs its own code at that call site, so put the
 //      original logic back yourself.
 //
-// Replace the MyMod namespace with the one your mod uses.
+// The namespace and class below are filled in by `ncm template example`,
+// using the project you run it in.
 using NetCraft.Game.Server;
 using NetCraft.ModApi.Extension;
 using NetCraft.Network;
 using NetCraft.Network.Protocol.Login;
 
-namespace MyMod;
+namespace __MOD_NAMESPACE__;
 
-public static class InjectExample
+public static class __MOD_CLASS__
 {
     // Runs instead of every PlayerList.PlaceNewPlayer call site.
     // nameof keeps the rule in sync when the kernel method gets renamed.

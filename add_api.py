@@ -23,15 +23,17 @@ ROOT = pathlib.Path(__file__).resolve().parent
 CATALOG = ROOT / "NetCraftTemplate.yaml"
 
 # Skeleton for a brand new example. Braces are doubled for str.format.
+# The two placeholders are filled in by `ncm template example`, not here.
 SKELETON = """// {title}
 //
 // {summary}
 //
-// Replace the MyMod namespace with the one your mod uses.
+// The namespace and class below are filled in by `ncm template example`,
+// using the project you run it in.
 {usings}
-namespace MyMod;
+namespace __MOD_NAMESPACE__;
 
-public static class {class_name}
+public static class __MOD_CLASS__
 {{
     // TODO: show how {api_id} is used.
     public static void Run()
@@ -56,7 +58,6 @@ def skeleton(api_id: str, title: str, summary: str) -> str:
         title=title,
         summary=summary,
         usings=pick_using(api_id),
-        class_name=api_id.rsplit(".", 1)[-1] + "Example",
         api_id=api_id,
     )
 

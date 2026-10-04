@@ -4,13 +4,14 @@
 // is a wrapper type, so a kernel rename does not reach your code. Subscribe
 // from your entry point, the event table is ready before the first tick.
 //
-// Replace the MyMod namespace with the one your mod uses.
+// The namespace and class below are filled in by `ncm template example`,
+// using the project you run it in.
 using NetCraft.Logging;
 using NetCraft.ModApi.Wrapper;
 
-namespace MyMod;
+namespace __MOD_NAMESPACE__;
 
-public sealed class ServerEventsExample
+public sealed class __MOD_CLASS__
 {
     public void Init()
     {

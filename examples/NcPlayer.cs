@@ -5,13 +5,14 @@
 // always maps to the same handle. Coordinates are plain numbers on purpose,
 // so no kernel value type leaks into the public surface.
 //
-// Replace the MyMod namespace with the one your mod uses.
+// The namespace and class below are filled in by `ncm template example`,
+// using the project you run it in.
 using NetCraft.Logging;
 using NetCraft.ModApi.Wrapper;
 
-namespace MyMod;
+namespace __MOD_NAMESPACE__;
 
-public static class NcPlayerExample
+public static class __MOD_CLASS__
 {
     // Called from ServerEvents.PlayerJoin, the join packet sequence is done here.
     public static void Greet(NcPlayer player)
