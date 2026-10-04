@@ -7,28 +7,74 @@ base: https://raw.githubusercontent.com/XSY-HYH/NetCraftTemplate/refs/heads/main
 # Document rendered by `ncm template ui`.
 document: NetCraftTemplate.md
 
+# How `ncm template ui` spots api usage while it reads the open project.
+# It goes through every *.cs file for `Type.Member`, where Type starts with one
+# of the prefixes below or is spelled out in types, then grades the symbol
+# against the apis list further down:
+#   declared type + declared member -> correct    (green)
+#   declared type + other member    -> suspicious (amber)
+#   type not declared at all        -> unknown    (red)
+# An entry without a members list accepts any member.
+grade:
+  prefixes: [Nc]
+  types: [ServerEvents, ClientEvents, NetworkEvents]
+
+# The apis list is the authoritative api surface. Keep it complete: an api that
+# works but is not declared here still shows up as unknown.
 apis:
   - id: NetCraft.ModApi.Wrapper.NcServer
     title: Server facade
     summary: Online list, broadcast, command execution and save.
     template: examples/NcServer.cs
+    members: [Current, IsAvailable, Require, Settings, Commands, TickRate, EntityTracker, CommandStorage, GameRules, PlayerData, Stopwatches, DebugPlayers, Connections, BlockEntities, Overworld, Nether, End, GetLevel, Running, TickCount, AverageTickTimeNanos, Tps, WorldSeed, SpawnPos, SetSpawnPos, DefaultGameType, SetDefaultGameType, WhiteListEnabled, SavingEnabled, SetWeather, SaveAll, Broadcast, Execute]
   - id: NetCraft.ModApi.Wrapper.NcPlayer
     title: Player handle
     summary: Read only view over a kernel ServerPlayer.
     template: examples/NcPlayer.cs
+    members: [Name, Uuid, EntityId, X, Y, Z, Yaw, Pitch, Health, MaxHealth, GameType, PermissionLevel, HasPermission, IsAlive, IsSneaking, IsSprinting]
+  - id: NetCraft.ModApi.Wrapper.NcPlayers
+    title: Player actions
+    summary: Look up online players and act on them.
+    members: [All, Count, Max, Find, Send, SendOverlay, Kick, SetGameMode, SetPermissionLevel, Teleport, TeleportTo, SetHealth, Heal, Hurt]
   - id: NetCraft.ModApi.Wrapper.NcWorld
     title: World access
     summary: Block read and write, time, weather level and world border.
     template: examples/NcWorld.cs
-  - id: NetCraft.ModApi.Wrapper.ServerEvents
-    title: Server events
-    summary: Subscribe to lifecycle, player, chunk and block events.
-    template: examples/ServerEvents.cs
-  - id: NetCraft.ModApi.Extension.InjectAttribute
-    title: Injection attribute
-    summary: Hook your own method onto a kernel call site.
-    template: examples/InjectAttribute.cs
+    members: [Overworld, Nether, End, Get, DayTime, GameTime, Clock, RainLevel, ThunderLevel, IsRaining, IsThundering, Border, Entities, GetBlock, SetBlock, BreakBlock, GetBlockEntity, PlaySound, LevelEvent, FindBlock, FindState]
   - id: NetCraft.ModApi.Wrapper.NcRegistries
     title: Registry lookup
     summary: Find blocks, items, biomes, particles and entity types by id.
     template: examples/NcRegistries.cs
+    members: [Blocks, Items, Fluids, MobEffects, Biomes, Particles, EntityTypes, BlockEntityTypes, FindBlock, FindState, FindItem, FindFluid, FindMobEffect, FindBiome, FindParticle, FindEntityType, FindBlockEntityType]
+  - id: NetCraft.ModApi.Wrapper.NcRecipes
+    title: Recipe lookup
+    summary: Crafting, stonecutting and cooking recipes.
+    members: [Manager, IsAvailable, Require, Count, StonecutterCount, CookingCount, Craft, Find, StonecuttingFor, CookingFor]
+  - id: NetCraft.ModApi.Wrapper.NcLists
+    title: Lists and settings
+    summary: Whitelist, operators, bans and server.properties.
+    members: [WhiteList, Ops, Bans, IpBans, Settings, IsOp, IsBanned, IsWhitelisted, SetGameMode, SetDifficulty, SetPlayerIdleTimeout, SetWhiteList, SaveSettings]
+  - id: NetCraft.ModApi.Wrapper.NcStartup
+    title: Startup arguments
+    summary: Tokens the kernel did not recognize, plus per name subscriptions.
+    members: [Ready, Arguments, IsReady, Has, Value, Values, Subscribe]
+  - id: NetCraft.ModApi.Wrapper.ServerEvents
+    title: Server events
+    summary: Subscribe to lifecycle, player, chunk and block events.
+    template: examples/ServerEvents.cs
+    members: [Tick, Started, Stopping, CommandRegister, CommandExecuted, PlayerJoin, PlayerLeave, PlayerDisconnect, PlayerHurt, PlayerDeath, PlayerChat, ChunkLoaded, ChunkUnloaded, ChunkSaved, LevelTick, SavedDataSaving, BlockChanged, BlockBroken, ItemDropped]
+  - id: NetCraft.ModApi.Wrapper.ClientEvents
+    title: Client events
+    summary: Client side tick.
+    members: [Tick]
+  - id: NetCraft.ModApi.Wrapper.NetworkEvents
+    title: Network events
+    summary: Inbound packets on both sides.
+    members: [PacketReceived]
+  - id: NetCraft.ModApi.Extension.InjectAttribute
+    title: Injection attribute
+    summary: Hook your own method onto a kernel call site.
+    template: examples/InjectAttribute.cs
+  - id: NetCraft.ModApi.Extension.MixinAttribute
+    title: Mixin attribute
+    summary: Move members of your class into a kernel type.

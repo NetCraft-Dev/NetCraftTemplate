@@ -86,6 +86,7 @@ def main() -> int:
     parser.add_argument("--title", required=True, help="short name shown in the list")
     parser.add_argument("--summary", required=True, help="one line description")
     parser.add_argument("--template", help="example path relative to the repository root")
+    parser.add_argument("--members", help="comma separated member names, used by the usage check")
     args = parser.parse_args()
 
     text = CATALOG.read_text(encoding="utf-8")
@@ -115,6 +116,9 @@ def main() -> int:
     lines.append(f"    title: {yaml_value(args.title)}")
     lines.append(f"    summary: {yaml_value(args.summary)}")
     lines.append(f"    template: {yaml_value(template)}")
+    members = [name.strip() for name in (args.members or "").split(",") if name.strip()]
+    if members:
+        lines.append(f"    members: [{', '.join(members)}]")
     CATALOG.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     print(f"added {args.id} -> {template}")
