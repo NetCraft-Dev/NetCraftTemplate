@@ -2,7 +2,7 @@
 # Read by `ncm template`. Field names stay in sync with TemplateCatalog.cs.
 
 # Fetch base for every template path below.
-base: https://raw.githubusercontent.com/XSY-HYH/NetCraftTemplate/refs/heads/main
+base: https://raw.githubusercontent.com/NetCraft-Dev/NetCraftTemplate/refs/heads/main
 
 # Document rendered by `ncm template ui`.
 document: NetCraftTemplate.md
