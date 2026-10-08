@@ -26,7 +26,7 @@ apis:
     title: Server facade
     summary: Online list, broadcast, command execution and save.
     template: examples/NcServer.cs
-    members: [Current, IsAvailable, Require, Settings, Commands, TickRate, EntityTracker, CommandStorage, GameRules, PlayerData, Stopwatches, DebugPlayers, Connections, BlockEntities, Overworld, Nether, End, Running, TickCount, AverageTickTimeNanos, Tps, WorldSeed, SpawnPos, SetSpawnPos, DefaultGameType, SetDefaultGameType, WhiteListEnabled, SavingEnabled, SetWeather, SaveAll, Broadcast, Execute]
+    members: [Current, IsAvailable, Require, Settings, TickRate, GameRules, Overworld, Nether, End, Running, TickCount, AverageTickTimeNanos, Tps, WorldSeed, SpawnPos, SetSpawnPos, DefaultGameType, SetDefaultGameType, WhiteListEnabled, SavingEnabled, SetWeather, SaveAll, Broadcast, Execute]
   - id: NetCraft.ModApi.Wrapper.NcPlayer
     title: Player handle
     summary: Read only view over a kernel ServerPlayer.
@@ -41,7 +41,7 @@ apis:
     title: World access
     summary: Block read and write on any dimension, plus the level handles for time, weather and border.
     template: examples/NcWorld.cs
-    members: [Overworld, Nether, End, Get, DayTime, GameTime, Clock, RainLevel, ThunderLevel, IsRaining, IsThundering, Border, Entities, GetBlock, SetBlock, BreakBlock, GetBlockEntity, PlaySound, LevelEvent, FindBlock, FindState]
+    members: [Overworld, Nether, End, Get, DayTime, GameTime, RainLevel, ThunderLevel, IsRaining, IsThundering, Border, GetBlock, SetBlock, BreakBlock, LevelEvent, FindBlock, FindState]
   - id: NetCraft.ModApi.Wrapper.NcLevel
     title: Level handle
     summary: Read only view over one dimension, holding its time, weather and height range.
@@ -61,7 +61,7 @@ apis:
     title: Lists and settings
     summary: Whitelist, operators, bans and server.properties.
     template: examples/NcLists.cs
-    members: [WhiteList, Ops, Bans, IpBans, Settings, IsOp, IsBanned, IsWhitelisted, SetGameMode, SetDifficulty, SetPlayerIdleTimeout, SetWhiteList, SaveSettings]
+    members: [WhiteList, Ops, Bans, IpBans, Settings, IsOp, IsBanned, IsWhitelisted]
   - id: NetCraft.ModApi.Wrapper.NcStartup
     title: Startup arguments
     summary: Tokens the kernel did not recognize, plus per name subscriptions.
@@ -90,3 +90,73 @@ apis:
     title: Mixin attribute
     summary: Move members of your class into a kernel type.
     template: examples/MixinAttribute.cs
+  - id: NetCraft.ModApi.Wrapper.NcServerSettings
+    title: Settings handle
+    summary: server.properties at runtime, writes go to the file on Save.
+    template: examples/NcServerSettings.cs
+    members: [Port, MaxPlayers, LevelName, Gamemode, Difficulty, OnlineMode, AllowPvp, AllowFlight, ViewDistance, SimulationDistance, Motd, WhiteListConfig, PlayerIdleTimeout, NcLanguage, SetGamemode, SetDifficulty, SetPlayerIdleTimeout, SetWhiteList, Save]
+  - id: NetCraft.ModApi.Wrapper.NcGameRules
+    title: Game rules handle
+    summary: Read and write game rules by name.
+    template: examples/NcGameRules.cs
+    members: [All, CanonicalName, GetBool, SetBool, GetInt, SetInt]
+  - id: NetCraft.ModApi.Wrapper.NcTickRate
+    title: Tick rate handle
+    summary: Freeze, step and sprint the world clock.
+    template: examples/NcTickRate.cs
+    members: [Rate, SetRate, IsFrozen, SetFrozen, IsSprinting, Sprint, StopSprint, Step, StopStep]
+  - id: NetCraft.ModApi.Wrapper.NcWorldBorder
+    title: World border handle
+    summary: Size, center and damage knobs of one world border.
+    template: examples/NcWorldBorder.cs
+    members: [Size, SetSize, CenterX, CenterZ, SetCenter, MinX, MaxX, MinZ, MaxZ, DamagePerBlock, SafeZone, WarningTime, WarningBlocks, AbsoluteMaxSize, Contains, DistanceTo]
+  - id: NetCraft.ModApi.Wrapper.NcWhiteList
+    title: White list handle
+    summary: Read and edit whitelist.json.
+    template: examples/NcWhiteList.cs
+    members: [Count, Names, Contains, Add, Remove]
+  - id: NetCraft.ModApi.Wrapper.NcOpList
+    title: Operator list handle
+    summary: Read and edit ops.json.
+    template: examples/NcOpList.cs
+    members: [Count, Names, Contains, PermissionLevel, Add, Remove]
+  - id: NetCraft.ModApi.Wrapper.NcBanList
+    title: Player ban handle
+    summary: Read and edit banned-players.json.
+    template: examples/NcBanList.cs
+    members: [IsBanned, Ban, Unban]
+  - id: NetCraft.ModApi.Wrapper.NcIpBanList
+    title: Ip ban handle
+    summary: Read and edit banned-ips.json.
+    template: examples/NcIpBanList.cs
+    members: [IsBanned, Ban, Unban]
+  - id: NetCraft.ModApi.Wrapper.NcAccess
+    title: Escape hatch
+    summary: Reach kernel members the facades do not cover.
+    template: examples/NcAccess.cs
+    members: [Unwrap, FindType, Field, Property, Method]
+  - id: NetCraft.ModApi.Wrapper.NcField
+    title: Field handle
+    summary: Read and write one kernel field.
+    template: examples/NcField.cs
+    members: [Name, FieldType, CanWrite, Get, Set]
+  - id: NetCraft.ModApi.Wrapper.NcProperty
+    title: Property handle
+    summary: Read and write one kernel property.
+    template: examples/NcProperty.cs
+    members: [Name, PropertyType, CanRead, CanWrite, Get, Set]
+  - id: NetCraft.ModApi.Wrapper.NcMethod
+    title: Method handle
+    summary: Invoke one kernel method.
+    template: examples/NcMethod.cs
+    members: [Name, ReturnType, ParameterCount, Invoke]
+  - id: NetCraft.ModApi.Wrapper.NcEvent
+    title: Event handle
+    summary: Hold one subscription, dispose it to unsubscribe.
+    template: examples/NcEvent.cs
+    members: [Subscribe]
+  - id: NetCraft.ModApi.Wrapper.NcStartupArgs
+    title: Startup args
+    summary: The kernel-unrecognized command line tokens.
+    template: examples/NcStartup.cs
+    members: [Arguments]

@@ -1,7 +1,7 @@
 // NcLists: white list, operators, bans and server.properties.
 //
-// These are the kernel's live list objects, not copies. The SetXxx helpers
-// only touch memory; nothing reaches the file until SaveSettings.
+// These are the kernel's live list objects, not copies. The settings view is
+// NcLists.Settings; its setters only touch memory until Save runs.
 //
 // The namespace and class below are filled in by `ncm template example`,
 // using the project you run it in.
@@ -15,17 +15,18 @@ public static class __MOD_CLASS__
     // Change the writable server.properties values, then persist them.
     public static void Harden()
     {
-        NcLists.SetDifficulty("hard");
-        NcLists.SetWhiteList(true);
-        NcLists.SetPlayerIdleTimeout(30);
-        NcLists.SaveSettings();          //only now does it reach the file
+        var settings = NcLists.Settings;
+        settings.SetDifficulty("hard");
+        settings.SetWhiteList(true);
+        settings.SetPlayerIdleTimeout(30);
+        settings.Save();                 //only now does it reach the file
         Log.Info("server.properties updated");
     }
 
-    // The list objects themselves are reachable when you need to read them.
+    // Read the settings and the list objects themselves.
     public static void ShowSettings()
     {
-        Log.Info($"game mode {NcLists.Settings.GameMode}, difficulty {NcLists.Settings.Difficulty}");
+        Log.Info($"game mode {NcLists.Settings.Gamemode}, difficulty {NcLists.Settings.Difficulty}");
         Log.Info($"white list has {NcLists.WhiteList.Count} entries");
     }
 }
